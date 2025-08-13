@@ -2,22 +2,16 @@
 </script>
 
 <template>
+  <!-- <div class="app-bar">
+    <h1>Home Modification Coalition for KC</h1>
+  </div> -->
   <main>
     <RouterView />
   </main>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.app-bar {
+  box-shadow: 4px rgba(0, 0, 0, 0.8);
 }
 </style>
