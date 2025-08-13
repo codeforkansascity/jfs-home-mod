@@ -1,0 +1,14 @@
+{
+  "name": "jfs-home-mode",
+  "private": true,
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "yarn workspaces run start",
+    "build": "yarn workspaces run build",
+    "lint": "yarn workspaces run lint"
+  }
+}

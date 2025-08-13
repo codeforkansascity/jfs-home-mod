@@ -1,0 +1,35 @@
+:root {
+  --primary-color: #525356;
+  --primary-color-text: #ffffff;
+
+  --secondary-color: #F4900C;
+  --secondary-color-text: #ffffff;
+
+  /* Optional: update hover/focus shades */
+  --primary-color-hover: #6a6b6f;
+  --secondary-color-hover: #fcaa3a;
+}
+
+/* Example override: primary buttons */
+.p-button.p-button-primary {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color-text);
+}
+
+.p-button.p-button-primary:hover {
+  background: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
+}
+
+/* Example: secondary styled button (custom class) */
+.p-button.secondary {
+  background: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color-text);
+}
+
+.p-button.secondary:hover {
+  background: var(--secondary-color-hover);
+  border-color: var(--secondary-color-hover);
+}
