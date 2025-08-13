@@ -2,9 +2,9 @@
 </script>
 
 <template>
-  <!-- <div class="app-bar">
+  <div class="app-bar">
     <h1>Home Modification Coalition for KC</h1>
-  </div> -->
+  </div>
   <main>
     <RouterView />
   </main>
