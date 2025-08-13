@@ -1,6 +1,10 @@
 <script lang="ts" setup>
-import { reactive } from 'vue';
-import { InputText, Divider, InputNumber, Calendar, Dropdown, Button, Card, FloatLabel, Textarea } from 'primevue';
+import { reactive, ref } from 'vue';
+import { Dialog, InputText, Divider, InputNumber, Calendar, Dropdown, Button, Card, FloatLabel, Textarea } from 'primevue';
+import { RouteNames } from '../../router';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const form = reactive({
   firstName: '',
@@ -32,9 +36,15 @@ function updateHouseholdMembers() {
   }
 }
 
+const showConfirmation = ref(false);
+
 function submitForm() {
   console.log('Form submitted:', JSON.parse(JSON.stringify(form)))
-  // You can now send the data to an API or store it
+  showConfirmation.value = true;
+}
+
+function onConfirm() {
+  router.push({ name: RouteNames.Application.ApplicationResult });
 }
 </script>
 
@@ -61,6 +71,8 @@ function submitForm() {
             a home imposes discomfort, the environment of a home is unsafe, or the home presents a health hazard.
           </p>
         </div>
+        <Divider />
+        <h3>Contact Information</h3>
         <div class="flex flex-row mb-1">
           <FloatLabel variant="in" class="flex-1">
             <InputText id="firstName" v-model="form.firstName" />
@@ -89,6 +101,15 @@ function submitForm() {
           <Textarea />
         </div>
         <Divider />
+        <h3>Household Information</h3>
+        <div class="flex flex-1 mb-1">
+          <label for="ownership">Home Ownership</label>
+          <Dropdown id="ownership" v-model="form.homeOwnership" :options="['Rent', 'Own']" placeholder="Select one" />
+        </div>
+        <div class="flex flex-1 mb-1">
+          <label for="income">Annual Income</label>
+          <InputNumber inputId="income" v-model="form.annualIncome" mode="currency" currency="USD" locale="en-US" />
+        </div>
         <div class="flex flex-row mb-1">
           <FloatLabel variant="in">
             <InputNumber inputId="householdCount" v-model="form.householdCount" :min="1"
@@ -135,27 +156,27 @@ function submitForm() {
           </FloatLabel>
         </div>
         <Divider />
-        <div class="flex flex-1 mb-1">
-          <InputGroup>
-            <label for="ownership">Home Ownership</label>
-            <div>
-              <Dropdown id="ownership" v-model="form.homeOwnership" :options="['Rent', 'Own']"
-                placeholder="Select one" />
-            </div>
-          </InputGroup>
-        </div>
-        <div class="flex flex-1 mb-1">
-          <FloatLabel variant="in">
-            <label for="income">Annual Income</label>
-            <InputNumber inputId="income" v-model="form.annualIncome" mode="currency" currency="USD" locale="en-US" />
-          </FloatLabel>
-        </div>
-        <Divider />
       </template>
       <template #footer>
         <Button label="Submit" class="mt-3" @click="submitForm" />
       </template>
     </Card>
+    <Dialog v-model:visible="showConfirmation" modal header="Confirm Submission" style="max-width: 512px;">
+      <p>
+        By filling out and signing this form, you are agreeing to submit an application to the Orange County Department
+        of
+        Housing and Community Development, but also allowing us to share the information you provide with all
+        organizations within the Home Modification Coalition of KC Application so that we can work together to better serve
+        you! If you meet the initial criteria, staff from Rebuilding Together of the Triangle will contact you by
+        telephone to
+        set up a home visit to assess the requested repairs to evaluate whether or not your home is a a good fit for one
+        or
+        more of the organizations’ programs.
+      </p>
+      <Button @click="onConfirm">
+        I Agree
+      </Button>
+    </Dialog>
   </div>
 </template>
 

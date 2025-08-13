@@ -1,14 +1,18 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
 import ApplicantForm from '../views/application/ApplicantForm.vue';
+import ApplicationResult from "../views/application/ApplicationResult.vue";
 
 export const RouteNames = {
   Application: {
-    ApplicationForm: 'ApplicantForm'
+    ApplicationForm: 'ApplicantForm',
+    ApplicationResult: 'ApplicationResult',
   }
 } as const;
 
 const routes: Array<RouteRecordRaw> = [
-  { path: '/', component: ApplicantForm }
+  { path: '/result', name: RouteNames.Application.ApplicationResult, component: ApplicationResult },
+  { path: '/', name: RouteNames.Application.ApplicationForm, component: ApplicantForm },
+  
 ];
 
 export const router = createRouter({
